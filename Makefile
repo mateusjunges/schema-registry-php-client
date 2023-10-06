@@ -18,8 +18,8 @@ PHP_CS_FIXER ?= bin/php-cs-fixer.phar
 PHP_CS_FIXER_VERSION ?= 3.2.1
 PHPUNIT ?= vendor/bin/phpunit
 PHP ?= bin/php
-PHP_VERSION ?= 7.4
-XDEBUG_VERSION ?= 3.1.1
+PHP_VERSION ?= 8.2
+XDEBUG_VERSION ?= 3.2.2
 XDEBUG_OPTIONS ?= -d xdebug.mode=off
 export
 
