@@ -1,5 +1,5 @@
 {
-  "name": "flix-tech/confluent-schema-registry-api",
+  "name": "mateusjunges/confluent-schema-registry-api",
   "description": "A PHP 7.4+ library to consume the Confluent Schema Registry REST API.",
   "minimum-stability": "stable",
   "type": "library",
@@ -8,6 +8,10 @@
     {
       "name": "Thomas Ploch",
       "email": "thomas.ploch@flixbus.com"
+    },
+    {
+      "name": "Mateus Junges",
+      "email": "mateus@junges.dev"
     }
   ],
   "require": {
