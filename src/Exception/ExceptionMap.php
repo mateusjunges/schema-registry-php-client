@@ -77,7 +77,7 @@ final class ExceptionMap
     private function guardAgainstMissingErrorCode(ResponseInterface $response): array
     {
         try {
-            $decodedBody = \GuzzleHttp\json_decode((string) $response->getBody(), true);
+            $decodedBody = json_decode((string) $response->getBody(), true);
 
             if (!is_array($decodedBody) || !array_key_exists(self::ERROR_CODE_FIELD_NAME, $decodedBody)) {
                 throw new RuntimeException(
