@@ -159,8 +159,8 @@ function prepareJsonSchemaForTransfer(string $schema, AvroReference ...$referenc
     ];
 
     return !$references
-        ? \GuzzleHttp\json_encode($return)
-        : \GuzzleHttp\json_encode(array_merge($return, ['references' => $references]));
+        ? json_encode($return, JSON_THROW_ON_ERROR)
+        : json_encode(array_merge($return, ['references' => $references]), JSON_THROW_ON_ERROR);
 }
 
 function validateCompatibilityLevel(string $compatibilityVersion): string
@@ -185,7 +185,7 @@ function validateCompatibilityLevel(string $compatibilityVersion): string
 
 function prepareCompatibilityLevelForTransport(string $compatibilityLevel): string
 {
-    return \GuzzleHttp\json_encode(['compatibility' => $compatibilityLevel]);
+    return json_encode(['compatibility' => $compatibilityLevel], JSON_THROW_ON_ERROR);
 }
 
 /**
