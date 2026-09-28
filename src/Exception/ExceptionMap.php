@@ -61,7 +61,9 @@ final class ExceptionMap
 
     private function guardAgainstMissingResponse(RequestException $exception): ResponseInterface
     {
-        $response = $exception->getResponse();
+        // Guzzle 7 exposes a nullable getResponse() on every RequestException;
+        // Guzzle 8 only exposes it on ResponseException (and its subclasses).
+        $response = method_exists($exception, 'getResponse') ? $exception->getResponse() : null;
 
         if (!$response) {
             throw new RuntimeException('RequestException has no response to inspect', 0, $exception);
