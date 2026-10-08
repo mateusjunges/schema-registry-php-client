@@ -17,6 +17,7 @@ use FlixTech\SchemaRegistryApi\Exception\SchemaNotFoundException;
 use FlixTech\SchemaRegistryApi\Exception\SchemaRegistryException;
 use FlixTech\SchemaRegistryApi\Exception\SubjectNotFoundException;
 use FlixTech\SchemaRegistryApi\Exception\VersionNotFoundException;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -36,7 +37,7 @@ class ExceptionMapTest extends TestCase
             'Invalid Avro schema',
             42201,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                 '422 Unprocessable Entity',
                     new Request('GET', '/'),
                     new Response(
@@ -59,7 +60,7 @@ class ExceptionMapTest extends TestCase
             'Incompatible Avro schema',
             409,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '409 Conflict',
                     new Request('GET', '/'),
                     new Response(
@@ -82,7 +83,7 @@ class ExceptionMapTest extends TestCase
             'Error in the backend datastore',
             50001,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '500 Internal Server Error',
                     new Request('GET', '/'),
                     new Response(
@@ -105,7 +106,7 @@ class ExceptionMapTest extends TestCase
             'Invalid compatibility level',
             42203,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '422 Unprocessable Entity',
                     new Request('GET', '/'),
                     new Response(
@@ -128,7 +129,7 @@ class ExceptionMapTest extends TestCase
             'Invalid version',
             42202,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '422 Unprocessable Entity',
                     new Request('GET', '/'),
                     new Response(
@@ -151,7 +152,7 @@ class ExceptionMapTest extends TestCase
             'Error while forwarding the request to the master',
             50003,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '500 Internal server Error',
                     new Request('GET', '/'),
                     new Response(
@@ -174,7 +175,7 @@ class ExceptionMapTest extends TestCase
             'Operation timed out',
             50002,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '500 Internal server Error',
                     new Request('GET', '/'),
                     new Response(
@@ -197,7 +198,7 @@ class ExceptionMapTest extends TestCase
             'Schema not found',
             40403,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '404 Not Found',
                     new Request('GET', '/'),
                     new Response(
@@ -220,7 +221,7 @@ class ExceptionMapTest extends TestCase
             'Subject not found',
             40401,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '404 Not Found',
                     new Request('GET', '/'),
                     new Response(
@@ -243,7 +244,7 @@ class ExceptionMapTest extends TestCase
             'Version not found',
             40402,
             (ExceptionMap::instance())(
-                new RequestException(
+                new BadResponseException(
                     '404 Not Found',
                     new Request('GET', '/'),
                     new Response(
@@ -290,7 +291,7 @@ class ExceptionMapTest extends TestCase
         $this->expectExceptionMessage('Invalid message body received - cannot find "error_code" field in response body');
 
         (ExceptionMap::instance())(
-            new RequestException(
+            new BadResponseException(
                 '404 Not Found',
                 new Request('GET', '/'),
                 new Response(
@@ -311,7 +312,7 @@ class ExceptionMapTest extends TestCase
         $this->expectExceptionMessage('Unknown error code "99999"');
 
         (ExceptionMap::instance())(
-            new RequestException(
+            new BadResponseException(
                 '404 Not Found',
                 new Request('GET', '/'),
                 new Response(
